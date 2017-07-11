@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="main.css" />
+        <script type="application/javascript" src="page_element.js"></script>
+        <script type="application/javascript" src="page_item.js"></script>
+        <script type="application/javascript" src="elements.js"></script>
+        <script type="application/javascript" src="main.js"></script>
+    </head>
+    <body onmouseup="stop_move()" oncontextmenu="return false;" onblur="stop_move()">
+        <div id="side_bar">
+            <div class="item" onmousedown="create('text', -170, 0)">
+                <p>Text Area</p>
+            </div>
+        </div>
+        <div id="main_window">
+            <!--<div class="text_area">
+                <div class="button">Hello</div>
+                <div class="button">hi</div>
+                <p class="textarea" contentEditable="true" onkeypress="console.log('press')" onpaste="console.log('paste')" ></p>
+            </div>-->
+        </div>
+        
+        <!--<svg id="main_window" xmlns="http://www.w3.org/2000/svg" version="1.1" shape-rendering="optimizeSpeed">
+            <rect width="170" height="100%" style="fill:#CECFCE;" />
+            <g>
+                <rect width="150" height="10" style="fill:#fECFCE;" onmousedown="create('text', 0, 0)" />
+                <foreignObject width="150" height="130" x="0" y="10">
+                    <textarea id="text_area" style="width: 150px; height: 130px;">
+                    At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+                    </textarea>
+                </foreignObject>
+            </g>
+        </svg>-->
+    </body>
+</html>
