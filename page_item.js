@@ -84,7 +84,4 @@ class _page_item {
         this.dom.style.pointerEvents = "none";
         this.dom.parentNode.removeChild(this.dom);
     }
-    
-    
-
 } 
