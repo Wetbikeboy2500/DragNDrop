@@ -1,12 +1,5 @@
-let current_block = null, items = [], arr = [], counter = -1, current_item = null;//items stroes structured data but arr stores everything
+let current_block = null, items = [], arr = [], counter = -1, current_item = null;//items array stores structured data but arr array stores everything
 
-/*window.onload = () => {
-    counter += 1;
-    arr[counter] = page_item(0, counter, "text", 10);
-    items[0] = arr[counter];
-    arr[counter].set_dom();
-};
-*/
 function create (a, x, y) {
     current_block = page_element(a, "block", x, y);
     current_block.set_dom();
@@ -23,6 +16,7 @@ function stop_move () {
     }
 }
 
+//this is when you add a new element to the page
 function check_block () {
     if (current_block.x <= 0) {
         //delete block and not do anything
@@ -31,6 +25,7 @@ function check_block () {
         let object = null, place = null;
         //still going to delete but also add a new element to the page
         current_block.del();
+        //finds objects it can connect to
         items.forEach((a, i) => {
             if (a != null && object == null) {
                 if (current_block.y < a.get_top_y() && current_block.y > a.get_top_y() - 10) {
@@ -52,12 +47,14 @@ function check_block () {
         if (object == null) {
             //didn't find a place to connect then add to the last position
             if (items.length == 0) {
+                //make the first element of page
                 console.log("make new");
                 counter += 1;
                 arr[counter] = page_item(0, counter, "text", 10);
                 items[0] = arr[counter];
                 arr[counter].set_dom();
             } else {
+                //add the new element to the last position
                 console.log("add last");
                 counter += 1;
                 arr[counter] = page_item(items.length, counter, "text", items[items.length - 1].get_bottom_y() + 10);
@@ -65,8 +62,10 @@ function check_block () {
                 arr[counter].set_dom();
             }
         } else {
+            //found an object to connect to
             counter += 1;
             if (place == "top") {
+                //insert into current object position and move down all the blocks below it
                 console.log("add above " + object);
                 arr[counter] = page_item(object.index, counter, "text", object.get_top_y());
                 arr[counter].set_dom();
@@ -78,6 +77,7 @@ function check_block () {
                     items[i].render();
                 }
             } else {
+                //insert below current object and move all elements below it down
                 console.log("add below "+ object);
                 arr[counter] = page_item(object.index + 1, counter, "text", object.get_bottom_y() + 10);
                 arr[counter].set_dom();
@@ -93,6 +93,8 @@ function check_block () {
     current_block = null;
 }
 
+
+//this is when you move a preexisting element on the page
 function check_item () {
     //check to see where it should go
     let object = null, place = null;
@@ -153,6 +155,7 @@ function check_item () {
     current_item = null;
 }
 
+//remove this object and update the elements positions below it 
 function _delete (id) {
     items.splice(arr[id].index, 1);
     for (let i = arr[id].index; i < items.length; i++) {
@@ -176,6 +179,8 @@ function _move (id) {
     current_item.move();
 }
 
+
+//edits the font
 function bold () {
     document.execCommand('bold');
 }
@@ -187,6 +192,12 @@ function italic () {
 function underline () {
     document.execCommand("Underline");
 }
+
+function remove_format () {
+    document.execCommand("removeFormat");
+}
+
+//resizing the input items
 function key_press (id) {
     setTimeout(() => {
         console.log("change");
