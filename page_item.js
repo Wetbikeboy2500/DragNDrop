@@ -8,7 +8,6 @@ class _page_item {
         this.id = id;
         this.y = y;
         this.font = "default";
-        console.log(this.y);
         if (type == "text") {
             let container = create_element().default("div").att("class", "text_area").att("style", "top:" + this.y + "px;").att("id", this.id);
                 let button = create_element().default("div").att("class", "button").att("onclick", "bold()");
@@ -27,7 +26,7 @@ class _page_item {
                 button.dom.appendChild(document.createTextNode("Move"));
                 container.dom.appendChild(button.dom);
                 container.dom.appendChild(create_element().default("p").att("class", "textarea").att("contentEditable", "true").att("onkeypress", "key_press("+ this.id+")").att("onpaste", "key_press("+this.id+")").att("oncut", "key_press("+this.id+")").dom);
-                document.getElementById("main_window").appendChild(container.dom);
+                document.getElementById("bottom_element").appendChild(container.dom);
         }
     }
     
@@ -54,6 +53,7 @@ class _page_item {
     }
     
     setup () {
+        document.getElementById("top_element").appendChild(this.dom);
         this.sy = get_my();
     }
 
@@ -77,6 +77,7 @@ class _page_item {
     }
 
     stop () {
+        document.getElementById("bottom_element").appendChild(this.dom);
         clearInterval(this.clock);
     }
     

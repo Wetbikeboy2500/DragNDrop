@@ -71,7 +71,7 @@ function _create (a, id, x, y) { //a will determine the type of element it will 
                 let p = create_element().default("p");
                 p.dom.appendChild(document.createTextNode("Text Area"));
                 container.dom.appendChild(p.dom);
-                document.getElementById("main_window").appendChild(container.dom);
+                document.getElementById("side_bar").appendChild(container.dom);
             break;
         default:
             console.log("Object doesn't exsist");

@@ -199,3 +199,16 @@ function key_press (id) {
         }  
     }, 10); 
 }
+
+window.onresize = () => {
+    console.log("Resized");
+    for (let i = 0; i < items.length; i++) {
+        let change = items[i].get_height_change();
+        if (change != 0) {
+            for (let i2 = i + 1; i2 < items.length; i2++) {
+                items[i2].y += change;
+                items[i2].render();
+            }
+        } 
+    }
+};

@@ -16,6 +16,7 @@ body {
 }
 #main_window {
     position: absolute;
+    top: 0px;
     left: 170px;
     width: calc(100% - 170px);
     height: 100%;
@@ -24,6 +25,7 @@ body {
 }
 #side_bar {
     position: absolute;
+    top: 0px;
     left: 0px;
     width: 170px;
     height: 100%;
@@ -46,10 +48,9 @@ body {
     top: 10px;
     width: calc(100% - 20px);
     border: 3px dashed #999;
-    z-index: 1;
 }
 .textarea {
-    padding: 0px;
+    padding: 5px;
     padding-left: 5px;
     padding-right: 5px;
     position: relative;
