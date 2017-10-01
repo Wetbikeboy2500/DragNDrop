@@ -8,6 +8,8 @@ class _page_item {
         this.id = id;
         this.y = y;
         this.font = "default";
+        this.value = "";
+        this.type = type;
         if (type == "text") {
             let button;
             let container = create_element().default("div").att("class", "text_area").att("style", "top:" + this.y + "px;").att("id", this.id);

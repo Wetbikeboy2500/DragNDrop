@@ -179,6 +179,24 @@ function _move (id) {
     current_item.move();
 }
 
+//loads and previews the project in an iframe
+function preview () {
+    console.log("preview");
+    let iframe = document.getElementById("preview");
+    iframe = iframe.contentDocument || iframe.contentWindow.document;
+    iframe.body.innerHTML = "";
+    for (let i = 0; i < items.length; i++) {
+        console.log(items[i]);
+        if (items[i].type == "text") {
+            let t = document.createElement("p");
+            t.appendChild(document.createTextNode(items[i].value));
+            iframe.body.appendChild(t);
+        }
+    }
+    document.getElementById("preview").style.display = "block";
+    document.getElementById("main_window").style.display = "none";
+    document.getElementById("side_bar").style.display = "none";
+}
 
 //edits the font
 function bold () {
@@ -197,10 +215,11 @@ function remove_format () {
     document.execCommand("removeFormat");
 }
 
-//resizing the input items
+//resizing the input items and logging the new input
 function key_press (id) {
     setTimeout(() => {
         console.log("change");
+        arr[id].value = arr[id].dom.getElementsByTagName("p")[0].innerHTML;
         let change = arr[id].get_height_change();
         if (change != 0) {
             for (let i = arr[id].index + 1; i < items.length; i++) {

@@ -9,6 +9,11 @@
         <script type="application/javascript" src="main.js"></script>
     </head>
     <body onmouseup="stop_move()" oncontextmenu="return false;" onblur="stop_move()">
+        <div id="run_bar">
+            <div class="run_button" onclick="preview()">
+                <p>Preview</p>
+            </div>
+        </div>
         <div id="main_window">
             <div id="bottom_element"></div>
             <div id="top_element"></div>
@@ -18,5 +23,6 @@
                 <p>Text Area</p>
             </div>
         </div>
+        <iframe id="preview"></iframe>
     </body>
 </html>
