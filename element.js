@@ -19,17 +19,6 @@ class _element {
         return this;
     }
 
-    /*o (name, value, select = false) {
-        let a = document.createElement("option");
-        a.setAttribute("value", value);
-        a.appendChild(document.createTextNode("name"));
-        if (select) {
-            a.setAttribute("selected", true);
-        }
-        this.dom.appendChild(a);
-        return this.dom;
-    }*/
-
     o (options, selected) {
         console.log(options);
         for (let a in options) {
@@ -63,6 +52,11 @@ class _element {
         if (disable == "true") {
             this.dom.setAttribute("onmousedown", "create_block(0, 20, '"+n+"')");
         }
+        return this;
+    }
+    
+    e (trigger, callback) {
+        this.dom.addEventListener(trigger, callback);
         return this;
     }
 

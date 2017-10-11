@@ -1,5 +1,17 @@
 let current_block = null, items = [], arr = [], counter = -1, current_item = null, mode = null;//items array stores structured data but arr array stores everything
 
+window.onload = () => {
+    document.getElementById("file").addEventListener("change", () => {
+        let reader = new FileReader();
+        reader.onload = (event) => {
+            let result = reader.result;
+            console.log(result);
+        }
+        console.log(file.files);
+        reader.readAsText(new Blob(file.files, {type: "text/plain"}), "UTF-8");
+    });
+};
+
 function create (a, x, y) {
     current_block = page_element(a, "block", x, y);
     current_block.set_dom();
@@ -191,7 +203,7 @@ function preview () {
             console.log(items[i]);
             if (items[i].type == "text") {
                 let t = document.createElement("p");
-                t.appendChild(document.createTextNode(items[i].value));
+                t.innerHTML = items[i].dom.getElementsByClassName("textarea")[0].innerHTML;
                 iframe.body.appendChild(t);
             }
         }
@@ -205,6 +217,42 @@ function preview () {
         document.getElementById("side_bar").style.display = "block";
     }
 }
+//saves the website so you can edit it later
+function save () {
+    let text = "";
+    let name = "";
+    let blob = new Blob([text], {type: "text/plain"});
+    let a = document.createElement("a");
+    a.setAttribute("download", name);
+    a.setAttribute("href", window.URL.createObjectURL(blob));
+    document.body.appendChild(a);
+    a.addEventListener("click", () => {
+        document.body.removeChild(a);
+    });
+    a.click();
+}
+
+//loads the website from your save
+function load () {
+    document.getElementById("file").click();
+}
+/*
+function loadFileAsText() {
+	var fileToLoad = document.getElementById("fileToLoad").files[0];
+
+	var fileReader = new FileReader();
+	fileReader.onload = function(fileLoadedEvent) {
+		var textFromFileLoaded = fileLoadedEvent.target.result;
+        loaddata(textFromFileLoaded);
+		//document.getElementById("inputTextToSave").value = textFromFileLoaded; This is the output
+	};
+	fileReader.readAsText(fileToLoad, "UTF-8");
+}
+
+function loadfile() {
+    document.getElementById("fileToLoad").click();
+}
+*/
 
 //edits the font
 function bold () {
