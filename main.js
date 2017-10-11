@@ -1,4 +1,4 @@
-let current_block = null, items = [], arr = [], counter = -1, current_item = null;//items array stores structured data but arr array stores everything
+let current_block = null, items = [], arr = [], counter = -1, current_item = null, mode = null;//items array stores structured data but arr array stores everything
 
 function create (a, x, y) {
     current_block = page_element(a, "block", x, y);
@@ -43,7 +43,7 @@ function check_block () {
                 }
             }
         });
-        
+
         if (object == null) {
             //didn't find a place to connect then add to the last position
             if (items.length == 0) {
@@ -182,20 +182,28 @@ function _move (id) {
 //loads and previews the project in an iframe
 function preview () {
     console.log("preview");
-    let iframe = document.getElementById("preview");
-    iframe = iframe.contentDocument || iframe.contentWindow.document;
-    iframe.body.innerHTML = "";
-    for (let i = 0; i < items.length; i++) {
-        console.log(items[i]);
-        if (items[i].type == "text") {
-            let t = document.createElement("p");
-            t.appendChild(document.createTextNode(items[i].value));
-            iframe.body.appendChild(t);
+    if (mode === null) {
+        mode = "preview";
+        let iframe = document.getElementById("preview");
+        iframe = iframe.contentDocument || iframe.contentWindow.document;
+        iframe.body.innerHTML = "";
+        for (let i = 0; i < items.length; i++) {
+            console.log(items[i]);
+            if (items[i].type == "text") {
+                let t = document.createElement("p");
+                t.appendChild(document.createTextNode(items[i].value));
+                iframe.body.appendChild(t);
+            }
         }
+        document.getElementById("preview").style.display = "block";
+        document.getElementById("main_window").style.display = "none";
+        document.getElementById("side_bar").style.display = "none";
+    } else {
+        mode = null;
+        document.getElementById("preview").style.display = "none";
+        document.getElementById("main_window").style.display = "block";
+        document.getElementById("side_bar").style.display = "block";
     }
-    document.getElementById("preview").style.display = "block";
-    document.getElementById("main_window").style.display = "none";
-    document.getElementById("side_bar").style.display = "none";
 }
 
 //edits the font

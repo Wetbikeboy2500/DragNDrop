@@ -11,34 +11,15 @@ class _page_item {
         this.value = "";
         this.type = type;
         if (type == "text") {
-            let button;
-            let container = create_element().default("div").att("class", "text_area").att("style", "top:" + this.y + "px;").att("id", this.id);
-                button = create_element().default("div").att("class", "button").att("onmousedown", "_move("+this.id+")");
-                button.dom.appendChild(document.createTextNode("Move"));
-                container.dom.appendChild(button.dom);
-            
-                button = create_element().default("div").att("class", "button").att("onclick", "bold()");
-                button.dom.appendChild(document.createTextNode("Bold"));
-                container.dom.appendChild(button.dom);
-            
-                button = create_element().default("div").att("class", "button").att("onclick", "italic()");
-                button.dom.appendChild(document.createTextNode("Italic"));
-                container.dom.appendChild(button.dom);
-            
-                button = create_element().default("div").att("class", "button").att("onclick", "underline()");
-                button.dom.appendChild(document.createTextNode("Underline"));
-                container.dom.appendChild(button.dom);
-            
-                button = create_element().default("div").att("class", "button").att("onclick", "remove_format()");
-                button.dom.appendChild(document.createTextNode("Normal"));
-                container.dom.appendChild(button.dom);
-            
-                button = create_element().default("div").att("class", "button").att("onclick", "_delete("+this.id+")");
-                button.dom.appendChild(document.createTextNode("Delete"));
-                container.dom.appendChild(button.dom);
-                
-                container.dom.appendChild(create_element().default("p").att("class", "textarea").att("contentEditable", "true").att("onkeypress", "key_press("+ this.id+")").att("onpaste", "key_press("+this.id+")").att("oncut", "key_press("+this.id+")").dom);
-                document.getElementById("bottom_element").appendChild(container.dom);
+            element("div").a("class", "text_area").a("style", "top:" + this.y + "px;").a("id", this.id)
+                .append(element("div").a("class", "button").a("onmousedown", "_move("+this.id+")").t("Move"))
+                .append(element("div").a("class", "button").a("onclick", "bold()").t("Bold"))
+                .append(element("div").a("class", "button").a("onclick", "italic()").t("Italic"))
+                .append(element("div").a("class", "button").a("onclick", "underline()").t("Underline"))
+                .append(element("div").a("class", "button").a("onclick", "remove_format()").t("Normal"))
+                .append(element("div").a("class", "button").a("onclick", "_delete("+this.id+")").t("Delete"))
+                .append(element("p").a("class", "textarea").a("contentEditable", "true").a("onkeypress", "key_press("+ this.id+")").a("onpaste", "key_press("+this.id+")").a("oncut", "key_press("+this.id+")"))
+                .ap(document.getElementById("bottom_element"));
         }
     }
     

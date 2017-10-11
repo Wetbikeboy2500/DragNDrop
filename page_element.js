@@ -67,12 +67,9 @@ class _page_element {
 function _create (a, id, x, y) { //a will determine the type of element it will create
     switch (a) {
         case "text":
-            let container = create_element().default("div").att("class", "item_move").att("id", id).att("style", "left:" + x + "px; top:" + y + "px;");
-                let p = create_element().default("p");
-                p.dom.appendChild(document.createTextNode("Text Area"));
-                container.dom.appendChild(p.dom);
-                document.getElementById("side_bar").appendChild(container.dom);
-            break;
+            element("div").a("class", "item_move").a("id", id).a("style", "left:" + x + "px; top:" + y + "px;")
+                .append(element("p").t("Text Area"))
+                .ap(document.getElementById("side_bar"));
         default:
             console.log("Object doesn't exsist");
     }
