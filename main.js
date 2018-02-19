@@ -13,6 +13,7 @@ window.onload = () => {
 };
 
 function create (a, x, y) {
+    console.log(a);
     current_block = page_element(a, "block", x, y);
     current_block.set_dom();
     current_block.move();
@@ -30,13 +31,10 @@ function stop_move () {
 
 //this is when you add a new element to the page
 function check_block () {
-    if (current_block.x <= 0) {
-        //delete block and not do anything
-        current_block.del();
-    } else {
+    //deletes the element but not the object on screen
+    current_block.del();
+    if (current_block.x > 0) {
         let object = null, place = null;
-        //still going to delete but also add a new element to the page
-        current_block.del();
         //finds objects it can connect to
         items.forEach((a, i) => {
             if (a != null && object == null) {
@@ -62,14 +60,14 @@ function check_block () {
                 //make the first element of page
                 console.log("make new");
                 counter += 1;
-                arr[counter] = page_item(0, counter, "text", 10);
+                arr[counter] = page_item(0, counter, current_block.type, 10);
                 items[0] = arr[counter];
                 arr[counter].set_dom();
             } else {
                 //add the new element to the last position
                 console.log("add last");
                 counter += 1;
-                arr[counter] = page_item(items.length, counter, "text", items[items.length - 1].get_bottom_y() + 10);
+                arr[counter] = page_item(items.length, counter, current_block.type, items[items.length - 1].get_bottom_y() + 10);
                 items[items.length] = arr[counter];
                 arr[counter].set_dom();
             }
@@ -79,7 +77,7 @@ function check_block () {
             if (place == "top") {
                 //insert into current object position and move down all the blocks below it
                 console.log("add above " + object);
-                arr[counter] = page_item(object.index, counter, "text", object.get_top_y());
+                arr[counter] = page_item(object.index, counter, current_block.type, object.get_top_y());
                 arr[counter].set_dom();
                 items.splice(object.index, 0, arr[counter]);
                 console.log(items);
@@ -91,7 +89,7 @@ function check_block () {
             } else {
                 //insert below current object and move all elements below it down
                 console.log("add below "+ object);
-                arr[counter] = page_item(object.index + 1, counter, "text", object.get_bottom_y() + 10);
+                arr[counter] = page_item(object.index + 1, counter, current_block.type, object.get_bottom_y() + 10);
                 arr[counter].set_dom();
                 items.splice(object.index + 1, 0, arr[counter]);
                 for (let i = object.index + 2; i < items.length; i++) {
@@ -205,6 +203,10 @@ function preview () {
                 let t = document.createElement("p");
                 t.innerHTML = items[i].dom.getElementsByClassName("textarea")[0].innerHTML;
                 iframe.body.appendChild(t);
+            } else if (items[i].type == "title") {
+                let t = document.createElement("h1");
+                t.innerHTML = items[i].dom.getElementsByClassName("textarea")[0].innerHTML;
+                iframe.body.appendChild(t);
             }
         }
         document.getElementById("preview").style.display = "block";
@@ -218,6 +220,8 @@ function preview () {
     }
 }
 //saves the website so you can edit it later
+//this currently doesn't save anything but it is capable of saving a file with information and then reloading that information
+//The thing that needs to be worked on is interpreting and parsing that information to reload the project in its current state
 function save () {
     let text = "";
     let name = "";
@@ -269,6 +273,15 @@ function underline () {
 
 function remove_format () {
     document.execCommand("removeFormat");
+}
+
+function dropdown (id) {
+    let element = document.getElementById(id).getElementsByClassName("dropdown")[0];
+    if (element.style.display == "none") {
+        element.style.display = "block";
+    } else {
+        element.style.display = "none";
+    }
 }
 
 //resizing the input items and logging the new input

@@ -12,7 +12,8 @@ body {
     -webkit-user-select: none; 
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;  
+    user-select: none; 
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 #main_window {
     position: absolute;
@@ -84,6 +85,18 @@ body {
     text-align: center;
     line-height: 30px;
     cursor: pointer;
+    background-color: #a6a6a6;
+}
+.dropdown {
+    display: none;
+    position: absolute;
+    width: 10%;
+    left: 20%;
+    z-index: 2;
+}
+.dropdown>div {
+    display: block;
+    width: 100%;
     background-color: #a6a6a6;
 }
 p {

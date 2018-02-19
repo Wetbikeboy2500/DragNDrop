@@ -65,11 +65,18 @@ class _page_element {
 }
 
 function _create (a, id, x, y) { //a will determine the type of element it will create
+    console.log(a);
     switch (a) {
         case "text":
             element("div").a("class", "item_move").a("id", id).a("style", "left:" + x + "px; top:" + y + "px;")
                 .append(element("p").t("Text Area"))
                 .ap(document.getElementById("side_bar"));
+            break;
+        case "title": 
+            element("div").a("class", "item_move").a("id", id).a("style", "left:" + x + "px; top:" + y + "px;")
+                .append(element("p").t("Title"))
+                .ap(document.getElementById("side_bar"));
+            break;
         default:
             console.log("Object doesn't exsist");
     }

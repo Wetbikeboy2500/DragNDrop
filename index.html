@@ -9,6 +9,7 @@
         <script type="application/javascript" src="main.js"></script>
     </head>
     <body onmouseup="stop_move()" oncontextmenu="return false;" onblur="stop_move()">
+        <h1 style="margin: 7px; float: left;">DragNDrop</h1>
         <div id="run_bar">
             <div class="run_button" onclick="preview()">
                 <p>Preview</p>
@@ -27,6 +28,9 @@
         <div id="side_bar">
             <div class="item" onmousedown="create('text', 0, 0)">
                 <p>Text Area</p>
+            </div>
+            <div class="item" onmousedown="create('title', 0, 70)">
+                <p>Title</p>
             </div>
         </div>
         <iframe id="preview"></iframe>
